@@ -1,79 +1,31 @@
 import axios from "axios";
-import { GET_ERRORS } from "./types";
+import {createdBrowswerHistory} from 'history'
+import { GET_ERRORS, GET_PROJECTS } from "./types";
 
-// export const createProject = (project, history) => async dispatch => {
+// let location = history.location
 
+// let unlisten = history.listen
+export const createProject = (project, history) => async dispatch => {
+  try {
+    const res = await axios.post("http://localhost:8080/api/project", project);
+    history.push("/dashboard");
+    console.log(project)
+  } catch (err) {
+      console.log(typeof err)
+       console.log(err)
+      console.log(err.response)
 
-    export const createProject = (project, history)=> async dispatch =>{
-        try{
-            const res = await axios.post("http://localhost:8080/api/project",project)
-            history.push("/dashboard").then()
-        }catch(err){
-            dispatch({
-                   type:GET_ERRORS,
-                    payload:err.response.data
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};
 
-            })
-         
-        }
-      }
-
-
-
-// try {
-//     const res = await axios.post("http://localhost:8080/api/project", project);
-//     history.push("/dashboard");
-//   } catch (err) {
-//     dispatch({
-//       type: GET_ERRORS,
-//       payload: err.response.data
-//     });
-//   }
-
-
-
-
-
-
-  
-// }
-
-
-
-
-
-
-
-// export const createProject = (project, history) => {
-// res
-//     return (dispatch) => {
-//         dispatch({type:GET_ERRORS, payload:err.response.data})
-//         axios.post("http://localhost:8080/api/project",project)
-//         history.push("/dashboard")
-//         .then((res)=>{
-
-//         })
-
-//     }
-    
-  
-// }
-
-    
-
-
-
-// First code written for this projectAction
-
-// try {
-//     const res = await axios.post("http://localhost:8080/api/project", project);
-//     history.push("/dashboard");
-//   } catch (err) {
-//     dispatch({
-//       type: GET_ERRORS,
-//       payload: err.response.data
-//     });
-//   }
-
-
-
+export const getProjects = () => async dispatch => {
+  const res = await axios.get("http://localhost:8080/api/project/all");
+  dispatch({
+    type: GET_PROJECTS,
+    payload: res.data
+  });
+};

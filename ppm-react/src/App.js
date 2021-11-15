@@ -13,7 +13,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App"> 
-          <Header/>
+         
+
+             <Header/>
+           
           <Routes> 
            <Route path="/" element={<Dashboard/>} />
            <Route path="/addProject" element={<AddProject/>}/>
