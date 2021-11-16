@@ -1,14 +1,10 @@
 import axios from "axios";
-// import {createdBrowswerHistory} from 'history'
 import { GET_ERRORS, GET_PROJECTS } from "./types";
 
-// let location = history.location
-
-// let unlisten = history.listen
 export const createProject = (project, history) => async dispatch => {
   try {
 
-    const res = await axios.post("http://localhost:8080/api/project", project);
+    const res = await axios.post("localhost:8080/api/project", project);
     history.push("/dashboard");
   } catch (err) {
     dispatch({
