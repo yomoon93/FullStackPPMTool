@@ -1,5 +1,5 @@
 import axios from "axios";
-import {createdBrowswerHistory} from 'history'
+// import {createdBrowswerHistory} from 'history'
 import { GET_ERRORS, GET_PROJECTS } from "./types";
 
 // let location = history.location
@@ -7,17 +7,13 @@ import { GET_ERRORS, GET_PROJECTS } from "./types";
 // let unlisten = history.listen
 export const createProject = (project, history) => async dispatch => {
   try {
+
     const res = await axios.post("http://localhost:8080/api/project", project);
     history.push("/dashboard");
-    console.log(project)
   } catch (err) {
-      console.log(typeof err)
-       console.log(err)
-      console.log(err.response)
-
     dispatch({
       type: GET_ERRORS,
-      payload: err.response.data
+      payload: err.response?.data
     });
   }
 };

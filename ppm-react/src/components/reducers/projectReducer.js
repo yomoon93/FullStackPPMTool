@@ -5,7 +5,7 @@ const initialState = {
     project: {}
 }
 export default function(state = initialState, action){
-    switch(action.types){
+    switch(action.type){
     case GET_PROJECTS:
     return{
         ...state, 
